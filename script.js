@@ -1,5 +1,3 @@
-// Matcha Cafe Gallery - Retro Edition JavaScript
-
 class CafeGallery {
     constructor() {
         this.cafes = this.loadCafes();
@@ -49,7 +47,7 @@ class CafeGallery {
         this.currentEditIndex = editIndex;
         
         if (editIndex !== null) {
-            modalTitle.textContent = '✎ edit matcha cafe!';
+            modalTitle.textContent = '✎ edit matcha cafe';
             const cafe = this.cafes[editIndex];
             document.getElementById('cafeName').value = cafe.name;
             document.getElementById('cafeLocation').value = cafe.location;
@@ -65,7 +63,7 @@ class CafeGallery {
             document.getElementById('cafeImage').value = cafe.image || '';
             document.getElementById('cafeNotes').value = cafe.notes || '';
         } else {
-            modalTitle.textContent = '✎ add a matcha cafe!';
+            modalTitle.textContent = '✎ add a matcha cafe';
             form.reset();
         }
         
@@ -117,7 +115,7 @@ class CafeGallery {
 
     deleteCafe(index) {
         const cafe = this.cafes[index];
-        if (confirm(`are you sure you want to delete "${cafe.name}"? 🥺`)) {
+        if (confirm(`are you sure you want to delete "${cafe.name}"?`)) {
             this.cafes.splice(index, 1);
             this.saveCafes();
             this.renderCafes();

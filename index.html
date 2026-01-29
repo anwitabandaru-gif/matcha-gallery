@@ -3,29 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍵 my matcha adventures!</title>
+    <title>cafe adventures</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <!-- Retro Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="retro-nav">
         <div class="nav-container">
-            <div class="nav-logo">🍵 matcha diary</div>
+            <div class="nav-logo">cafe diary</div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link active">home</a></li>
                 <li><a href="#" class="nav-link">my reviews</a></li>
                 <li><a href="#" class="nav-link">favorites ♥</a></li>
-                <li><a href="#" class="nav-link">about me</a></li>
             </ul>
         </div>
     </nav>
-    
-    <!-- Retro decorative elements -->
-    <div class="retro-dots"></div>
-    <div class="retro-stripes"></div>
     
     <header class="site-header">
         <div class="header-doodles">
@@ -35,10 +30,9 @@
         </div>
         <div class="header-content">
             <h1 class="site-title">
-                <span class="title-bubble">my matcha</span>
-                <span class="title-bubble">adventures!</span>
+                <span class="title-bubble">matcha adventures</span>
             </h1>
-            <p class="site-subtitle">✧ documenting all my cute matcha cafe visits ✧</p>
+            <p class="site-subtitle">matcha cafe</p>
         </div>
         <div class="header-wave">～～～～～～～～～～</div>
     </header>
@@ -46,7 +40,7 @@
     <main class="gallery-container">
         <div class="gallery-intro">
             <div class="intro-box">
-                <p>welcome to my little corner of the internet where i rate & review all the matcha cafes i visit! 🍵✨</p>
+                <p>i rate & review all the matcha cafes i visit here</p>
             </div>
         </div>
 
@@ -64,7 +58,7 @@
     <div class="modal" id="cafeModal">
         <div class="modal-content">
             <button class="modal-close" id="closeModal">&times;</button>
-            <h2 class="modal-title">✎ add a matcha cafe!</h2>
+            <h2 class="modal-title">✎ add a matcha cafe</h2>
             
             <form id="cafeForm">
                 <div class="form-group">
@@ -73,18 +67,18 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="cafeLocation">location 📍</label>
+                    <label for="cafeLocation">location</label>
                     <input type="text" id="cafeLocation" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="cafeDate">date visited 📅</label>
+                    <label for="cafeDate">date visited</label>
                     <input type="date" id="cafeDate" required>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="ratingEnvironment">environment ✨</label>
+                        <label for="ratingEnvironment">environment</label>
                         <select id="ratingEnvironment" required>
                             <option value="">rate it!</option>
                             <option value="5">★★★★★</option>
@@ -96,7 +90,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="ratingDrink">drink quality 🍵</label>
+                        <label for="ratingDrink">drink quality</label>
                         <select id="ratingDrink" required>
                             <option value="">rate it!</option>
                             <option value="5">★★★★★</option>
@@ -108,7 +102,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="ratingPhoto">photo-op 📸</label>
+                        <label for="ratingPhoto">photo-op</label>
                         <select id="ratingPhoto" required>
                             <option value="">rate it!</option>
                             <option value="5">★★★★★</option>
@@ -123,52 +117,52 @@
                 <div class="form-section-title">♡ drink details</div>
                 
                 <div class="form-group">
-                    <label for="drinkName">what i ordered 🥤</label>
+                    <label for="drinkName">what i ordered</label>
                     <input type="text" id="drinkName" placeholder="e.g., Matcha Latte">
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="drinkFlavor">flavor notes 👅</label>
+                        <label for="drinkFlavor">flavor notes</label>
                         <input type="text" id="drinkFlavor" placeholder="e.g., creamy, sweet">
                     </div>
                     
                     <div class="form-group">
-                        <label for="drinkColor">color 🎨</label>
+                        <label for="drinkColor">color</label>
                         <input type="text" id="drinkColor" placeholder="e.g., light green">
                     </div>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="drinkOrder">hot or iced? ❄️☕</label>
+                        <label for="drinkOrder">hot or iced?</label>
                         <select id="drinkOrder">
                             <option value="">choose</option>
-                            <option value="hot">hot ☕</option>
-                            <option value="iced">iced ❄️</option>
+                            <option value="hot">hot</option>
+                            <option value="iced">iced</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="drinkPrice">price 💰</label>
+                        <label for="drinkPrice">price</label>
                         <input type="text" id="drinkPrice" placeholder="$6.50">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="cafeImage">photo url 📸</label>
+                    <label for="cafeImage">photo url</label>
                     <input type="url" id="cafeImage" placeholder="https://...">
                     <small>paste a link to your photo!</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="cafeNotes">my thoughts ✎</label>
+                    <label for="cafeNotes">my thoughts</label>
                     <textarea id="cafeNotes" rows="4" placeholder="tell me about your experience..."></textarea>
                 </div>
                 
                 <div class="form-actions">
                     <button type="button" class="btn-secondary" id="cancelBtn">cancel</button>
-                    <button type="submit" class="btn-primary">save! ♡</button>
+                    <button type="submit" class="btn-primary">save ♡</button>
                 </div>
             </form>
         </div>
@@ -179,12 +173,12 @@
             <span>✿</span>
             <span>♡</span>
             <span>☆</span>
-            <span>🍵</span>
+            <span>♥</span>
             <span>✿</span>
             <span>♡</span>
             <span>☆</span>
         </div>
-        <p>made with lots of love & matcha ♥ © 2026</p>
+        <p>made with love & matcha ♥ © 2026</p>
     </footer>
 
     <script src="script.js"></script>

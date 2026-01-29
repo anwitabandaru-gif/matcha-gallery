@@ -1,13 +1,12 @@
 :root {
-    --retro-green-dark: #2d5016;
-    --retro-green-medium: #4a7c2f;
-    --retro-green-light: #6b9d4a;
-    --retro-green-pale: #c8d5b9;
-    --retro-cream: #f9f5e8;
-    --retro-white: #fffef7;
-    --retro-yellow: #ffd93d;
-    --retro-pink: #ffb5d8;
-    --retro-border: #2d5016;
+    --green-dark: #2d5016;
+    --green-medium: #4a7c2f;
+    --green-light: #7fa95c;
+    --green-matcha: #a1bf86;
+    --green-pale: #e8f0e0;
+    --cream: #fafaf8;
+    --white: #ffffff;
+    --border: #2d5016;
     
     --font-main: 'Gaegu', cursive;
 }
@@ -20,72 +19,35 @@
 
 body {
     font-family: var(--font-main);
-    background-color: var(--retro-cream);
-    color: var(--retro-green-dark);
+    background-color: var(--cream);
+    color: var(--green-dark);
     min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
     font-size: 18px;
     line-height: 1.6;
 }
 
-/* Retro Background Decorations */
-.retro-dots {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle, var(--retro-green-pale) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.3;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.retro-stripes {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 100%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        var(--retro-green-pale) 10px,
-        var(--retro-green-pale) 20px
-    );
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 0;
-}
-
 /* Navigation Bar */
 .retro-nav {
-    background: var(--retro-green-medium);
-    border-bottom: 4px solid var(--retro-border);
+    background: var(--white);
+    border-bottom: 2px solid var(--green-pale);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 0 rgba(45, 80, 22, 0.2);
 }
 
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1.2rem 2rem;
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .nav-logo {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    color: var(--retro-white);
-    text-shadow: 2px 2px 0 var(--retro-green-dark);
+    color: var(--green-dark);
 }
 
 .nav-menu {
@@ -95,176 +57,127 @@ body {
 }
 
 .nav-link {
-    color: var(--retro-white);
+    color: var(--green-medium);
     text-decoration: none;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    transition: all 0.3s ease;
-    position: relative;
+    transition: all 0.2s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    background: var(--retro-yellow);
-    color: var(--retro-green-dark);
-    transform: translateY(-2px);
+    background: var(--green-pale);
+    color: var(--green-dark);
 }
 
-/* Header */
+/* Header - Clean & Simple */
 .site-header {
     position: relative;
     padding: 4rem 2rem 3rem;
     text-align: center;
-    background: linear-gradient(180deg, var(--retro-green-light) 0%, var(--retro-green-pale) 100%);
-    border-bottom: 4px solid var(--retro-border);
-    animation: slideDown 0.8s ease-out;
+    background: var(--green-matcha);
+    border-bottom: 2px solid var(--green-matcha);
 }
 
 .header-doodles {
-    font-size: 32px;
-    margin-bottom: 1rem;
-    animation: float 3s ease-in-out infinite;
-}
-
-.doodle {
-    display: inline-block;
-    margin: 0 1rem;
-    animation: spin 4s linear infinite;
-}
-
-.doodle:nth-child(2) {
-    color: var(--retro-pink);
-    animation-delay: 1s;
-}
-
-.doodle:nth-child(3) {
-    color: var(--retro-yellow);
-    animation-delay: 2s;
+    display: none;
 }
 
 .site-title {
-    font-size: clamp(3rem, 10vw, 6rem);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     font-weight: 700;
-    color: var(--retro-white);
-    text-shadow: 4px 4px 0 var(--retro-green-dark);
+    color: var(--green-dark);
     margin-bottom: 1rem;
-    animation: bounceIn 1s ease-out;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 
 .title-bubble {
-    display: inline-block;
-    padding: 0.2rem 1.5rem;
-    background: var(--retro-green-dark);
-    border: 4px solid var(--retro-white);
-    border-radius: 50px;
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+    display: inline;
 }
 
 .site-subtitle {
-    font-size: 24px;
-    color: var(--retro-green-dark);
+    font-size: 20px;
+    color: var(--green-medium);
     font-weight: 400;
-    animation: fadeIn 1.5s ease-out;
 }
 
 .header-wave {
-    font-size: 28px;
-    color: var(--retro-green-dark);
-    margin-top: 1rem;
-    letter-spacing: 0.5rem;
+    display: none;
+}
+
+/* Remove decorative background elements */
+.retro-dots,
+.retro-stripes {
+    display: none;
 }
 
 /* Main Gallery Container */
 .gallery-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 3rem 2rem 5rem;
-    position: relative;
-    z-index: 2;
+    background: var(--green-matcha);
 }
 
 .gallery-intro {
     max-width: 700px;
     margin: 0 auto 4rem;
-    animation: fadeInUp 1s ease-out;
 }
 
 .intro-box {
-    background: var(--retro-white);
-    border: 4px solid var(--retro-green-dark);
-    border-radius: 20px;
+    background: var(--white);
+    border: 5px solid var(--green-medium);
+    border-radius: 12px;
     padding: 2rem;
-    box-shadow: 8px 8px 0 var(--retro-yellow);
-    position: relative;
 }
 
 .intro-box::before {
-    content: '♡';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 36px;
-    color: var(--retro-pink);
+    display: none;
 }
 
 .intro-box p {
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
-    color: var(--retro-green-dark);
-    font-weight: 400;
+    color: var(--green-dark);
 }
 
 /* Cafe Grid */
 .cafe-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 3rem;
+    gap: 2rem;
     margin-bottom: 4rem;
 }
 
 .cafe-card {
-    background: var(--retro-white);
-    border: 4px solid var(--retro-green-dark);
-    border-radius: 20px;
+    background: var(--white);
+    border: 4px solid var(--green-medium);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 8px 8px 0 var(--retro-green-pale);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
-    animation: popIn 0.5s ease-out backwards;
-    position: relative;
 }
 
 .cafe-card::before {
-    content: '✨';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    z-index: 10;
-    animation: twinkle 2s ease-in-out infinite;
+    display: none;
 }
 
 .cafe-card:hover {
-    transform: translateY(-10px) rotate(-2deg);
-    box-shadow: 12px 12px 0 var(--retro-yellow);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(45, 80, 22, 0.1);
+    border-color: var(--green-light);
 }
 
 .cafe-image {
     width: 100%;
     height: 200px;
-    background: linear-gradient(135deg, var(--retro-green-light), var(--retro-green-pale));
+    background: var(--green-pale);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 64px;
-    border-bottom: 4px solid var(--retro-green-dark);
-    position: relative;
+    border-bottom: 2px solid var(--green-pale);
     overflow: hidden;
 }
 
@@ -279,22 +192,21 @@ body {
 }
 
 .cafe-name {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
-    color: var(--retro-green-dark);
+    color: var(--green-dark);
     margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 0 var(--retro-yellow);
 }
 
 .cafe-location {
-    font-size: 20px;
-    color: var(--retro-green-medium);
-    margin-bottom: 0.5rem;
+    font-size: 18px;
+    color: var(--green-medium);
+    margin-bottom: 0.3rem;
 }
 
 .cafe-date {
-    font-size: 18px;
-    color: var(--retro-green-light);
+    font-size: 16px;
+    color: var(--green-light);
     margin-bottom: 1rem;
 }
 
@@ -304,9 +216,8 @@ body {
     gap: 0.5rem;
     margin: 1rem 0;
     padding: 1rem;
-    background: var(--retro-cream);
-    border: 2px dashed var(--retro-green-medium);
-    border-radius: 15px;
+    background: var(--cream);
+    border-radius: 8px;
 }
 
 .rating-item {
@@ -314,29 +225,28 @@ body {
 }
 
 .rating-label {
-    font-size: 14px;
-    color: var(--retro-green-medium);
+    font-size: 13px;
+    color: var(--green-medium);
     display: block;
     margin-bottom: 0.2rem;
 }
 
 .rating-stars {
-    font-size: 18px;
-    color: var(--retro-yellow);
+    font-size: 16px;
+    color: var(--green-medium);
 }
 
 .drink-info {
     margin-top: 1rem;
     padding: 1rem;
-    background: var(--retro-white);
-    border: 2px solid var(--retro-pink);
-    border-radius: 15px;
+    background: var(--cream);
+    border-radius: 8px;
 }
 
 .drink-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    color: var(--retro-green-dark);
+    color: var(--green-dark);
     margin-bottom: 0.5rem;
 }
 
@@ -344,86 +254,78 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
-    font-size: 16px;
-    color: var(--retro-green-medium);
+    font-size: 15px;
+    color: var(--green-medium);
 }
 
 .cafe-notes {
     margin-top: 1rem;
     padding: 1rem;
-    background: var(--retro-cream);
-    border-radius: 10px;
-    font-size: 18px;
+    background: var(--cream);
+    border-radius: 8px;
+    font-size: 16px;
     line-height: 1.6;
-    color: var(--retro-green-dark);
+    color: var(--green-dark);
 }
 
 .cafe-actions {
     margin-top: 1.5rem;
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .btn-edit, .btn-delete {
     flex: 1;
-    padding: 0.8rem;
-    border: 3px solid var(--retro-green-dark);
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: 700;
+    padding: 0.75rem;
+    border: 2px solid var(--green-pale);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
     font-family: var(--font-main);
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-edit {
-    background: var(--retro-yellow);
-    color: var(--retro-green-dark);
+    transition: all 0.2s ease;
+    background: var(--white);
+    color: var(--green-dark);
 }
 
 .btn-edit:hover {
-    background: var(--retro-green-dark);
-    color: var(--retro-yellow);
-    transform: scale(1.05);
-}
-
-.btn-delete {
-    background: var(--retro-white);
-    color: var(--retro-green-dark);
+    background: var(--green-pale);
+    border-color: var(--green-light);
 }
 
 .btn-delete:hover {
-    background: var(--retro-pink);
-    transform: scale(1.05);
+    background: #ffe8e8;
+    border-color: #ff9999;
+    color: #cc0000;
 }
 
 /* Add Cafe Button */
 .add-cafe-btn {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: 0.75rem;
     margin: 0 auto;
-    padding: 1.5rem 3rem;
-    background: var(--retro-green-dark);
-    color: var(--retro-white);
-    border: 4px solid var(--retro-green-dark);
-    border-radius: 50px;
-    font-size: 24px;
-    font-weight: 700;
+    padding: 1rem 2.5rem;
+    background: var(--green-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
     font-family: var(--font-main);
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 6px 6px 0 var(--retro-yellow);
+    transition: all 0.2s ease;
 }
 
 .add-cafe-btn:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 10px 10px 0 var(--retro-yellow);
-    background: var(--retro-green-medium);
+    background: var(--green-medium);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
 }
 
 .btn-icon {
-    font-size: 32px;
+    font-size: 24px;
     line-height: 1;
 }
 
@@ -435,10 +337,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(45, 80, 22, 0.8);
-    backdrop-filter: blur(8px);
+    background: rgba(45, 80, 22, 0.4);
+    backdrop-filter: blur(4px);
     z-index: 1000;
-    animation: fadeIn 0.3s ease;
 }
 
 .modal.active {
@@ -449,61 +350,58 @@ body {
 }
 
 .modal-content {
-    background: var(--retro-white);
-    border: 4px solid var(--retro-green-dark);
-    border-radius: 30px;
+    background: var(--white);
+    border: 2px solid var(--green-pale);
+    border-radius: 12px;
     padding: 2.5rem;
     max-width: 700px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 12px 12px 0 var(--retro-yellow);
-    animation: bounceIn 0.5s ease-out;
+    box-shadow: 0 20px 60px rgba(45, 80, 22, 0.15);
 }
 
 .modal-close {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: var(--retro-pink);
-    border: 3px solid var(--retro-green-dark);
+    background: var(--white);
+    border: 2px solid var(--green-pale);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 28px;
-    color: var(--retro-green-dark);
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    color: var(--green-dark);
     cursor: pointer;
     line-height: 1;
-    transition: all 0.3s ease;
-    font-weight: 700;
+    transition: all 0.2s ease;
+    font-weight: 400;
 }
 
 .modal-close:hover {
-    transform: rotate(90deg) scale(1.1);
-    background: var(--retro-yellow);
+    background: var(--green-pale);
+    border-color: var(--green-light);
 }
 
 .modal-title {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
-    color: var(--retro-green-dark);
+    color: var(--green-dark);
     text-align: center;
     margin-bottom: 2rem;
-    text-shadow: 2px 2px 0 var(--retro-yellow);
 }
 
 /* Form Styles */
 .form-section-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--retro-pink);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--green-dark);
     text-align: center;
     margin: 2rem 0 1rem;
     padding: 0.5rem;
-    background: var(--retro-cream);
-    border-radius: 15px;
-    border: 2px dashed var(--retro-pink);
+    background: var(--cream);
+    border-radius: 8px;
 }
 
 .form-group {
@@ -518,9 +416,9 @@ body {
 
 .form-group label {
     display: block;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--retro-green-dark);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--green-dark);
     margin-bottom: 0.5rem;
 }
 
@@ -528,35 +426,34 @@ body {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 1rem;
-    border: 3px solid var(--retro-green-dark);
-    border-radius: 15px;
+    padding: 0.75rem;
+    border: 2px solid var(--green-pale);
+    border-radius: 8px;
     font-family: var(--font-main);
-    font-size: 18px;
-    color: var(--retro-green-dark);
-    background: var(--retro-white);
-    transition: all 0.3s ease;
+    font-size: 16px;
+    color: var(--green-dark);
+    background: var(--white);
+    transition: all 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--retro-green-light);
-    box-shadow: 0 0 0 4px rgba(107, 157, 74, 0.2);
-    transform: translateY(-2px);
+    border-color: var(--green-light);
+    box-shadow: 0 0 0 3px rgba(127, 169, 92, 0.1);
 }
 
 .form-group small {
     display: block;
     margin-top: 0.5rem;
-    font-size: 16px;
-    color: var(--retro-green-medium);
+    font-size: 14px;
+    color: var(--green-medium);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 100px;
 }
 
 .form-actions {
@@ -568,65 +465,59 @@ body {
 .btn-primary,
 .btn-secondary {
     flex: 1;
-    padding: 1.2rem 2rem;
-    border: 3px solid var(--retro-green-dark);
-    border-radius: 20px;
-    font-size: 22px;
-    font-weight: 700;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
     font-family: var(--font-main);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-primary {
-    background: var(--retro-green-dark);
-    color: var(--retro-white);
+    background: var(--green-dark);
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    background: var(--retro-green-medium);
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 0 var(--retro-yellow);
+    background: var(--green-medium);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
 }
 
 .btn-secondary {
-    background: var(--retro-white);
-    color: var(--retro-green-dark);
+    background: var(--white);
+    color: var(--green-dark);
+    border: 2px solid var(--green-pale);
 }
 
 .btn-secondary:hover {
-    background: var(--retro-pink);
-    transform: translateY(-2px);
+    background: var(--green-pale);
 }
 
 /* Footer */
 .site-footer {
     text-align: center;
-    padding: 3rem 2rem;
-    background: var(--retro-green-medium);
-    border-top: 4px solid var(--retro-border);
-    color: var(--retro-white);
-    position: relative;
-    z-index: 2;
+    padding: 2.5rem 2rem;
+    background: var(--white);
+    border-top: 2px solid var(--green-pale);
+    color: var(--green-medium);
 }
 
 .footer-doodles {
-    font-size: 32px;
+    font-size: 24px;
     margin-bottom: 1rem;
+    opacity: 0.6;
 }
 
 .footer-doodles span {
     display: inline-block;
-    margin: 0 1rem;
-    animation: bounce 2s ease-in-out infinite;
-}
-
-.footer-doodles span:nth-child(2n) {
-    animation-delay: 0.5s;
+    margin: 0 0.5rem;
 }
 
 .site-footer p {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -638,24 +529,24 @@ body {
 }
 
 .empty-state-icon {
-    font-size: 80px;
+    font-size: 64px;
     margin-bottom: 1rem;
-    animation: float 3s ease-in-out infinite;
+    opacity: 0.5;
 }
 
 .empty-state-text {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--retro-green-dark);
+    margin-bottom: 0.5rem;
+    color: var(--green-dark);
 }
 
 .empty-state-subtext {
-    font-size: 22px;
-    color: var(--retro-green-medium);
+    font-size: 18px;
+    color: var(--green-medium);
 }
 
-/* Animations */
+/* Animations - subtle only */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -664,113 +555,28 @@ body {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes bounceIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    70% {
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes popIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(1.2);
-    }
-}
-
-/* Stagger animations for cards */
-.cafe-card:nth-child(1) { animation-delay: 0.1s; }
-.cafe-card:nth-child(2) { animation-delay: 0.2s; }
-.cafe-card:nth-child(3) { animation-delay: 0.3s; }
-.cafe-card:nth-child(4) { animation-delay: 0.4s; }
-.cafe-card:nth-child(5) { animation-delay: 0.5s; }
-.cafe-card:nth-child(6) { animation-delay: 0.6s; }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
-        gap: 1rem;
+        gap: 0.75rem;
     }
     
     .nav-link {
-        font-size: 18px;
+        font-size: 17px;
         padding: 0.4rem 0.8rem;
     }
     
     .cafe-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
     
     .site-header {
@@ -783,7 +589,6 @@ body {
     
     .modal-content {
         padding: 2rem 1.5rem;
-        border-radius: 20px;
     }
     
     .form-row {
