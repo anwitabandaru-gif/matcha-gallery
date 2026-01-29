@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matcha Journey ✦ Cafe Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <header class="site-header">
+        <div class="header-content">
+            <h1 class="site-title">
+                <span class="title-accent">抹茶</span>
+                <span class="title-main">Matcha Journey</span>
+            </h1>
+            <p class="site-subtitle">A curated collection of matcha moments</p>
+        </div>
+        <div class="header-decoration"></div>
+    </header>
+
+    <main class="gallery-container">
+        <div class="gallery-intro">
+            <p>Each cup tells a story. From hidden corners of the city to celebrated destinations, this is my journey through the world of matcha.</p>
+        </div>
+
+        <div class="cafe-grid" id="cafeGrid">
+            <!-- Cafe cards will be added here by JavaScript -->
+        </div>
+
+        <button class="add-cafe-btn" id="addCafeBtn">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Add New Cafe</span>
+        </button>
+    </main>
+
+    <!-- Modal for adding/editing cafes -->
+    <div class="modal" id="cafeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2 class="modal-title">Add Matcha Cafe</h2>
+            
+            <form id="cafeForm">
+                <div class="form-group">
+                    <label for="cafeName">Cafe Name</label>
+                    <input type="text" id="cafeName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cafeLocation">Location</label>
+                    <input type="text" id="cafeLocation" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cafeDate">Date Visited</label>
+                    <input type="date" id="cafeDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cafeRating">Rating</label>
+                    <select id="cafeRating" required>
+                        <option value="">Select rating</option>
+                        <option value="5">⭐⭐⭐⭐⭐ Exceptional</option>
+                        <option value="4">⭐⭐⭐⭐ Excellent</option>
+                        <option value="3">⭐⭐⭐ Good</option>
+                        <option value="2">⭐⭐ Fair</option>
+                        <option value="1">⭐ Needs Improvement</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cafeImage">Image URL</label>
+                    <input type="url" id="cafeImage" placeholder="https://...">
+                    <small>Optional: Add a photo URL of your matcha moment</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cafeNotes">Tasting Notes</label>
+                    <textarea id="cafeNotes" rows="4" placeholder="Describe the flavor, atmosphere, or memorable moments..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Cafe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>Brewed with care ☕ A personal collection of matcha experiences</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
