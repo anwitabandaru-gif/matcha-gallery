@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrate Your Cafes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        .migration-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .migration-card {
+            background: var(--white);
+            border: 4px solid var(--green-medium);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .migration-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--green-dark);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .migration-subtitle {
+            font-size: 18px;
+            color: var(--green-medium);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .status-box {
+            background: var(--cream);
+            border: 2px solid var(--green-pale);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--green-pale);
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-label {
+            font-weight: 600;
+            color: var(--green-dark);
+        }
+        
+        .status-value {
+            color: var(--green-medium);
+        }
+        
+        .status-value.good {
+            color: #2d5016;
+        }
+        
+        .status-value.bad {
+            color: #cc0000;
+        }
+        
+        .migrate-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: var(--font-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .migrate-btn:hover {
+            background: var(--green-medium);
+            transform: translateY(-2px);
+        }
+        
+        .migrate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-box {
+            display: none;
+            margin-top: 1.5rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: var(--cream);
+            border: 2px solid var(--green-pale);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--green-matcha);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green-dark);
+            font-weight: 700;
+        }
+        
+        .log-box {
+            background: var(--cream);
+            border: 2px solid var(--green-pale);
+            border-radius: 8px;
+            padding: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .log-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .log-item.success {
+            color: #2d5016;
+        }
+        
+        .log-item.error {
+            color: #cc0000;
+        }
+        
+        .info-box {
+            background: #fff8e1;
+            border: 2px solid #ffd54f;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: var(--white);
+            color: var(--green-dark);
+            border: 2px solid var(--green-pale);
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .back-link:hover {
+            background: var(--green-pale);
+        }
+    </style>
+</head>
+<body>
+    <nav class="retro-nav">
+        <div class="nav-container">
+            <div class="nav-logo">cafe diary</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">← back to cafes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="migration-container">
+        <div class="migration-card">
+            <h1 class="migration-title">🍵 Migrate Your Cafes</h1>
+            <p class="migration-subtitle">Transfer your cafe reviews from local storage to the cloud!</p>
+            
+            <div class="status-box" id="statusBox">
+                <div class="status-item">
+                    <span class="status-label">Backend Status:</span>
+                    <span class="status-value" id="backendStatus">Checking...</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Local Cafes Found:</span>
+                    <span class="status-value" id="localCount">Checking...</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Cloud Cafes:</span>
+                    <span class="status-value" id="cloudCount">Checking...</span>
+                </div>
+            </div>
+            
+            <button class="migrate-btn" id="migrateBtn" onclick="startMigration()">
+                Start Migration ✨
+            </button>
+            
+            <div class="progress-box" id="progressBox">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill">0%</div>
+                </div>
+                <div class="log-box" id="logBox"></div>
+            </div>
+            
+            <div class="info-box">
+                <strong>ℹ️ What This Does:</strong>
+                <ul>
+                    <li>Copies all your cafes from browser storage to Supabase cloud</li>
+                    <li>Your original data stays safe (not deleted unless you choose to)</li>
+                    <li>After migration, your cafes will sync across all devices!</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← Back to Gallery</a>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-doodles">
+            <span>✿</span>
+            <span>♡</span>
+            <span>☆</span>
+            <span>♥</span>
+            <span>✿</span>
+            <span>♡</span>
+            <span>☆</span>
+        </div>
+        <p>made with love & matcha ♥ © 2026</p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        let supabase;
+        let localCafes = [];
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkStatus();
+        });
+        
+        async function checkStatus() {
+            const migrateBtn = document.getElementById('migrateBtn');
+            
+            // Check if Supabase is configured
+            try {
+                supabase = initSupabase();
+                document.getElementById('backendStatus').innerHTML = '✅ Connected';
+                document.getElementById('backendStatus').classList.add('good');
+            } catch (error) {
+                document.getElementById('backendStatus').innerHTML = '❌ Not configured';
+                document.getElementById('backendStatus').classList.add('bad');
+                migrateBtn.disabled = true;
+                migrateBtn.textContent = 'Backend Not Set Up';
+                return;
+            }
+            
+            // Check local storage
+            const localData = localStorage.getItem('matchaCafes');
+            if (localData) {
+                localCafes = JSON.parse(localData);
+                document.getElementById('localCount').innerHTML = `${localCafes.length} cafes`;
+                document.getElementById('localCount').classList.add('good');
+            } else {
+                document.getElementById('localCount').innerHTML = '0 cafes';
+                document.getElementById('localCount').classList.add('bad');
+                migrateBtn.disabled = true;
+                migrateBtn.textContent = 'No Cafes to Migrate';
+            }
+            
+            // Check cloud storage
+            try {
+                const { data, error } = await supabase
+                    .from('cafes')
+                    .select('id', { count: 'exact', head: true });
+                
+                if (error) throw error;
+                
+                const count = data ? data.length : 0;
+                document.getElementById('cloudCount').innerHTML = `${count} cafes`;
+                document.getElementById('cloudCount').classList.add('good');
+            } catch (error) {
+                document.getElementById('cloudCount').innerHTML = 'Error checking';
+                document.getElementById('cloudCount').classList.add('bad');
+            }
+        }
+        
+        async function startMigration() {
+            const migrateBtn = document.getElementById('migrateBtn');
+            const progressBox = document.getElementById('progressBox');
+            const progressFill = document.getElementById('progressFill');
+            const logBox = document.getElementById('logBox');
+            
+            // Confirm before starting
+            if (!confirm(`Ready to migrate ${localCafes.length} cafes to the cloud?`)) {
+                return;
+            }
+            
+            // Setup UI
+            migrateBtn.disabled = true;
+            migrateBtn.textContent = 'Migration in Progress...';
+            progressBox.style.display = 'block';
+            logBox.innerHTML = '';
+            
+            let success = 0;
+            let failed = 0;
+            
+            // Migrate each cafe
+            for (let i = 0; i < localCafes.length; i++) {
+                const cafe = localCafes[i];
+                const progress = ((i + 1) / localCafes.length * 100).toFixed(0);
+                
+                progressFill.style.width = progress + '%';
+                progressFill.textContent = progress + '%';
+                
+                try {
+                    // Prepare data (remove old id field)
+                    const cafeData = {
+                        name: cafe.name,
+                        location: cafe.location,
+                        date: cafe.date,
+                        ratings: cafe.ratings,
+                        drinkInfo: cafe.drinkInfo || {},
+                        image: cafe.image || '',
+                        notes: cafe.notes || ''
+                    };
+                    
+                    const { error } = await supabase
+                        .from('cafes')
+                        .insert([cafeData]);
+                    
+                    if (error) throw error;
+                    
+                    success++;
+                    addLog(`✅ Migrated: ${cafe.name}`, 'success');
+                } catch (error) {
+                    failed++;
+                    addLog(`❌ Failed: ${cafe.name} - ${error.message}`, 'error');
+                    console.error('Migration error:', error);
+                }
+                
+                // Small delay to prevent overwhelming the API
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            
+            // Show results
+            progressFill.textContent = 'Complete!';
+            
+            if (failed === 0) {
+                alert(`🎉 Success! Migrated all ${success} cafes!\n\nYour cafes are now in the cloud and will sync across all devices!`);
+                
+                // Offer to clear local storage
+                if (confirm('Migration complete! Would you like to clear the old local storage data?')) {
+                    localStorage.removeItem('matchaCafes');
+                    alert('Local data cleared! Redirecting to your cafe gallery...');
+                    window.location.href = 'index.html';
+                } else {
+                    migrateBtn.textContent = 'Migration Complete!';
+                }
+            } else {
+                alert(`⚠️ Migration finished with some errors:\n\n✅ Success: ${success}\n❌ Failed: ${failed}\n\nCheck the log below for details.`);
+                migrateBtn.textContent = 'Migration Complete (with errors)';
+            }
+            
+            // Update status
+            await checkStatus();
+        }
+        
+        function addLog(message, type) {
+            const logBox = document.getElementById('logBox');
+            const logItem = document.createElement('div');
+            logItem.className = `log-item ${type}`;
+            logItem.textContent = message;
+            logBox.appendChild(logItem);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
