@@ -1,12 +1,22 @@
 class CafeGallery {
     constructor() {
-        this.cafes = this.loadCafes();
+        this.cafes = [];
         this.currentEditIndex = null;
+        this.supabase = null;
         this.init();
     }
 
-    init() {
+    async init() {
+        // Initialize Supabase
+        this.supabase = initSupabase();
+        
+        // Load cafes from database
+        await this.loadCafes();
+        
+        // Render the loaded cafes
         this.renderCafes();
+        
+        // Attach event listeners
         this.attachEventListeners();
         
         // Check if we should open edit modal from URL parameter
@@ -55,11 +65,11 @@ class CafeGallery {
             document.getElementById('ratingEnvironment').value = cafe.ratings.environment;
             document.getElementById('ratingDrink').value = cafe.ratings.drink;
             document.getElementById('ratingPhoto').value = cafe.ratings.photo;
-            document.getElementById('drinkName').value = cafe.drinkInfo.name || '';
-            document.getElementById('drinkFlavor').value = cafe.drinkInfo.flavor || '';
-            document.getElementById('drinkColor').value = cafe.drinkInfo.color || '';
-            document.getElementById('drinkOrder').value = cafe.drinkInfo.order || '';
-            document.getElementById('drinkPrice').value = cafe.drinkInfo.price || '';
+            document.getElementById('drinkName').value = cafe.drinkInfo?.name || '';
+            document.getElementById('drinkFlavor').value = cafe.drinkInfo?.flavor || '';
+            document.getElementById('drinkColor').value = cafe.drinkInfo?.color || '';
+            document.getElementById('drinkOrder').value = cafe.drinkInfo?.order || '';
+            document.getElementById('drinkPrice').value = cafe.drinkInfo?.price || '';
             document.getElementById('cafeImage').value = cafe.image || '';
             document.getElementById('cafeNotes').value = cafe.notes || '';
         } else {
@@ -78,7 +88,7 @@ class CafeGallery {
         this.currentEditIndex = null;
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
         
         const cafeData = {
@@ -98,27 +108,55 @@ class CafeGallery {
                 price: document.getElementById('drinkPrice').value
             },
             image: document.getElementById('cafeImage').value,
-            notes: document.getElementById('cafeNotes').value,
-            id: this.currentEditIndex !== null ? this.cafes[this.currentEditIndex].id : Date.now()
+            notes: document.getElementById('cafeNotes').value
         };
 
-        if (this.currentEditIndex !== null) {
-            this.cafes[this.currentEditIndex] = cafeData;
-        } else {
-            this.cafes.push(cafeData);
-        }
+        try {
+            if (this.currentEditIndex !== null) {
+                // Update existing cafe
+                const cafe = this.cafes[this.currentEditIndex];
+                const { error } = await this.supabase
+                    .from('cafes')
+                    .update(cafeData)
+                    .eq('id', cafe.id);
+                
+                if (error) throw error;
+            } else {
+                // Insert new cafe
+                const { error } = await this.supabase
+                    .from('cafes')
+                    .insert([cafeData]);
+                
+                if (error) throw error;
+            }
 
-        this.saveCafes();
-        this.renderCafes();
-        this.closeModal();
+            // Reload cafes from database
+            await this.loadCafes();
+            this.renderCafes();
+            this.closeModal();
+        } catch (error) {
+            console.error('Error saving cafe:', error);
+            alert('Oops! There was an error saving your cafe. Please try again.');
+        }
     }
 
-    deleteCafe(index) {
+    async deleteCafe(index) {
         const cafe = this.cafes[index];
         if (confirm(`are you sure you want to delete "${cafe.name}"?`)) {
-            this.cafes.splice(index, 1);
-            this.saveCafes();
-            this.renderCafes();
+            try {
+                const { error } = await this.supabase
+                    .from('cafes')
+                    .delete()
+                    .eq('id', cafe.id);
+                
+                if (error) throw error;
+                
+                await this.loadCafes();
+                this.renderCafes();
+            } catch (error) {
+                console.error('Error deleting cafe:', error);
+                alert('Oops! There was an error deleting the cafe. Please try again.');
+            }
         }
     }
 
@@ -152,7 +190,7 @@ class CafeGallery {
                 day: 'numeric' 
             });
 
-            const drinkInfoHTML = cafe.drinkInfo.name ? `
+            const drinkInfoHTML = cafe.drinkInfo?.name ? `
                 <div class="drink-info">
                     <div class="drink-name">🥤 ${cafe.drinkInfo.name}</div>
                     <div class="drink-details">
@@ -208,57 +246,21 @@ class CafeGallery {
         window.location.href = `cafe-detail.html?id=${cafe.id}`;
     }
 
-    saveCafes() {
-        localStorage.setItem('matchaCafes', JSON.stringify(this.cafes));
-    }
-
-    loadCafes() {
-        const saved = localStorage.getItem('matchaCafes');
-        if (saved) {
-            return JSON.parse(saved);
+    async loadCafes() {
+        try {
+            const { data, error } = await this.supabase
+                .from('cafes')
+                .select('*')
+                .order('date', { ascending: false });
+            
+            if (error) throw error;
+            
+            this.cafes = data || [];
+        } catch (error) {
+            console.error('Error loading cafes:', error);
+            // Fallback to empty array if there's an error
+            this.cafes = [];
         }
-        return [
-            {
-                id: 1,
-                name: "Cha Cha Matcha",
-                location: "New York, NY",
-                date: "2024-12-15",
-                ratings: {
-                    environment: 5,
-                    drink: 5,
-                    photo: 5
-                },
-                drinkInfo: {
-                    name: "Matcha Latte",
-                    flavor: "creamy, sweet, umami",
-                    color: "vibrant green",
-                    order: "iced",
-                    price: "$6.50"
-                },
-                image: "",
-                notes: "omg this place is SO cute!! the matcha was perfect and the vibes were immaculate ✨ definitely coming back!"
-            },
-            {
-                id: 2,
-                name: "Matcha Cafe Maiko",
-                location: "San Francisco, CA",
-                date: "2024-11-20",
-                ratings: {
-                    environment: 4,
-                    drink: 5,
-                    photo: 4
-                },
-                drinkInfo: {
-                    name: "Traditional Matcha",
-                    flavor: "authentic, slightly bitter",
-                    color: "deep green",
-                    order: "hot",
-                    price: "$5.75"
-                },
-                image: "",
-                notes: "super authentic japanese vibes! the matcha was chef's kiss 👌 loved the traditional preparation"
-            }
-        ];
     }
 }
 
