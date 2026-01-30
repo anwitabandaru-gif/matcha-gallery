@@ -192,12 +192,12 @@ class CafeGallery {
 
             const drinkInfoHTML = cafe.drinkInfo?.name ? `
                 <div class="drink-info">
-                    <div class="drink-name">🥤 ${cafe.drinkInfo.name}</div>
+                    <div class="drink-name">${cafe.drinkInfo.name}</div>
                     <div class="drink-details">
-                        ${cafe.drinkInfo.flavor ? `<div>👅 ${cafe.drinkInfo.flavor}</div>` : ''}
-                        ${cafe.drinkInfo.color ? `<div>🎨 ${cafe.drinkInfo.color}</div>` : ''}
-                        ${cafe.drinkInfo.order ? `<div>${cafe.drinkInfo.order === 'hot' ? '☕ hot' : '❄️ iced'}</div>` : ''}
-                        ${cafe.drinkInfo.price ? `<div>💰 ${cafe.drinkInfo.price}</div>` : ''}
+                        ${cafe.drinkInfo.flavor ? `<div> ☕︎: ${cafe.drinkInfo.flavor}</div>` : ''}
+                        ${cafe.drinkInfo.color ? `<div>𓌉◯𓇋: ${cafe.drinkInfo.color}</div>` : ''}
+                        ${cafe.drinkInfo.order ? `<div>${cafe.drinkInfo.order === 'hot' ? '♨: hot' : '₊°｡❆: iced'}</div>` : ''}
+                        ${cafe.drinkInfo.price ? `<div>⛁: ${cafe.drinkInfo.price}</div>` : ''}
                     </div>
                 </div>
             ` : '';
@@ -205,12 +205,12 @@ class CafeGallery {
             return `
                 <div class="cafe-card" onclick="gallery.openCafeDetail(${originalIndex})">
                     <div class="cafe-image">
-                        ${cafe.image ? `<img src="${cafe.image}" alt="${cafe.name}">` : '🍵'}
+                        ${cafe.image ? `<img src="${cafe.image}" alt="${cafe.name}">` : '‧₊˚ ⋅ ⟡ ݁₊ . ݁⊹ 🍵⊹ . ݁˖ . ݁⟡ ‧₊˚ ⋅'}
                     </div>
                     <div class="cafe-content">
                         <h3 class="cafe-name">${cafe.name}</h3>
-                        <div class="cafe-location">📍 ${cafe.location}</div>
-                        <div class="cafe-date">📅 ${formattedDate}</div>
+                        <div class="cafe-location">⚲: ${cafe.location}</div>
+                        <div class="cafe-date"> 🗓: ${formattedDate}</div>
                         
                         <div class="cafe-ratings">
                             <div class="rating-item">
