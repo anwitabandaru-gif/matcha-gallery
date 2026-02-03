@@ -126,7 +126,7 @@ body {
 }
 
 .intro-box {
-    background: var(--white);
+    background: var(--green-pale);
     border: 5px solid var(--green-medium);
     border-radius: 12px;
     padding: 2rem;
